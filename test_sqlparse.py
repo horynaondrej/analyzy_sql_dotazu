@@ -48,3 +48,31 @@ while i < len(tmp):
         print(pom)
     i += 1
 print(res)
+
+
+def is_trigger(value):
+    return isinstance(value, int) and str(value)[0] in ['3', '4']
+
+
+data = ['a', 'b', 'a', 'c', 'd', 'a', 'b', 'x', 'd']
+result = []
+current = []
+collecting = False
+
+for item in data:
+    if item == 'x':
+        break
+    elif item == 'a':
+        if collecting:
+            result.append(current)
+            current = []
+        else:
+            collecting = True
+    elif collecting:
+        current.append(item)
+
+# Pokud sběr skončil bez další 'a', přidáme poslední podseznam
+if collecting and current:
+    result.append(current)
+
+print(result)
